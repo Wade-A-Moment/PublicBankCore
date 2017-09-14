@@ -1,0 +1,35 @@
+﻿@model TransactionViewModel
+@{
+    ViewData["Title"] = "Withdrawal";
+    var ss = Model.TransactionAmount;
+
+}
+<h2>@ViewData["Title"]</h2>
+<form asp-controller="Manage" asp-action="Withdrawal" asp-route-id="@Model.BankAccountId" method="post" class="form-horizontal">
+    <h5>@ViewData["Message"]</h5>
+    <hr />
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group">
+        <input asp-for="BankAccountId" type="hidden" value="@Model.BankAccountId" />
+        <label asp-for="TransactionAmount" class="col-md-2 control-label">Withdrawal Amount</label>
+        <div class="col-md-10">
+            @if (Model.TransactionAmount == 0)
+            {
+                <input asp-for="TransactionAmount" value="" onchange="this.value = bankers_round(this.value, 2);" class="form-control" />
+            }
+            else
+            {
+                <input asp-for="TransactionAmount" onchange="this.value = bankers_round(this.value, 2);" class="form-control" /> 
+            }
+            <span asp-validation-for="TransactionAmount" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <button type="submit" class="btn btn-default">@ViewData["Title"]</button>
+        </div>
+    </div>
+</form>
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

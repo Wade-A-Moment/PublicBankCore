@@ -1,0 +1,5 @@
+﻿@{
+    ViewData["Title"] = "Check Balance";
+}
+<h2>The balance for this account is:</h2>
+<h3>@String.Format(Model.Value.ToString(),"0:0.00")</h3>
